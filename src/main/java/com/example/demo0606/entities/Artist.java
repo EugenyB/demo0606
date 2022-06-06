@@ -1,12 +1,17 @@
 package com.example.demo0606.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Artist {
+@Table(name = "artist")
+public class Artist implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ArtistId", nullable = false)
     private Integer id;
+
+    @Column(name = "Name", length = 120)
     private String name;
 
     public Integer getId() {

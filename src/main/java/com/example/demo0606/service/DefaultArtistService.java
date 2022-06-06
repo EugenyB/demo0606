@@ -8,6 +8,7 @@ import com.example.demo0606.repository.ArtistRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -49,11 +50,20 @@ public class DefaultArtistService implements ArtistService {
     }
 
     @Override
+//    public List<ArtistDto> findAll() {
+//        return artistRepository
+//                .findAll()
+//                .stream()
+//                .peek(a-> System.out.println(a.getName()))
+//                .map(artistConverter::fromArtistToArtistDto)
+//                .toList();
+//    }
+
     public List<ArtistDto> findAll() {
-        return artistRepository
-                .findAll()
-                .stream()
-                .map(artistConverter::fromArtistToArtistDto)
-                .toList();
+        List<ArtistDto> result = new ArrayList<>();
+        for (Artist artist : artistRepository.findAll()) {
+            result.add(artistConverter.fromArtistToArtistDto(artist));
+        }
+        return result;
     }
 }
